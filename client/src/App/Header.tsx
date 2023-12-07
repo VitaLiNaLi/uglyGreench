@@ -27,8 +27,8 @@ export default function Header(): JSX.Element {
           <Link className="text-sky-300 font-bold text-2xl mr-8" to="/">
             Main
           </Link>
-          <Link className="text-sky-300 font-bold text-2xl mr-8" to="/todo">
-            Todo
+          <Link className="text-sky-300 font-bold text-2xl mr-8" to="/profile">
+            Айди Нахуй бля 
           </Link>
           <HeaderCatalog openAndCloseModal={openAndCloseModal} />
           <HeaderAuth />

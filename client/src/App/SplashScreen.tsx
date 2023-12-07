@@ -1,5 +1,6 @@
 import React from 'react';
-import video from '../../public/videos/mainVideo.mp4';
+import { Link } from 'react-router-dom';
+import video from '../../public/videos/onePageSanta.mp4';
 
 function SplashScreen(): JSX.Element {
   return (
@@ -16,12 +17,12 @@ function SplashScreen(): JSX.Element {
         Ваш браузер не поддерживает тег video.
       </video>
       <div className="flex justify-center items-center h-full">
-        <a
-          href="/main"
+        <Link
+          to="/register"
           className="bg-transparent hover:bg-blue-500 text-3xl text-white font-bold py-12 px-24 rounded-lg z-10 border-2 border-white"
         >
           Нажмите сюда
-        </a>
+        </Link>
       </div>
     </div>
   );

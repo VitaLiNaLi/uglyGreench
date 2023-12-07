@@ -3,3 +3,18 @@ body {
   background-color: rgb(2 6 23);
   color: white;
 }
+
+
+@font-face {
+  font-family: 'Zanesennyj';
+  src: url('./fonts/Zanesennyj.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Merry-christmas-flake';
+  src: url('./fonts/Merry-christmas-flake.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}

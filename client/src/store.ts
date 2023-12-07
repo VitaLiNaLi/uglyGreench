@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import categoryReducer from './features/catalog/category/redux/reducer';
 import userReducer from './features/auth/redux/reducer';
 import questReducer from './features/todo/redux/reduser';
+import reducerProfile from './features/profile/redux/reducerProfile'
 
 //  комбинируем редьюсеры в один rootReducer
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   categoryReducer,
   userReducer,
   questReducer,
+  reducerProfile,
 });
 
 //  создаем redux стор

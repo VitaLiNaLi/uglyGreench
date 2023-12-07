@@ -7,14 +7,14 @@ const jwtConfig = require("../../config/jwtConfig");
 
 // аутентицикация существующего пользователя
 router.post("/login", async (req, res) => {
-  const { login, password } = req.body;
+  const {email, password} = req.body;
 
   try {
-    if (login === "" || password === "") {
+    if (email === "" || password === "") {
       res.status(400).json({ success: false, message: "Заполните все поля" });
     }
     // проверить, есть ли такой юзер в бд
-    const user = await User.findOne({ where: { login } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -31,11 +31,11 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const userData = { id: user.id, name: user.name, login: user.login };
+    const userData = { id: user.id, name: user.name, email: user.email };
 
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, login: user.login },
+      user: { id: user.id, name: user.name, email: user.email },
     });
 
     // устанавливаем куки
@@ -61,14 +61,14 @@ router.post("/login", async (req, res) => {
 
 // создание нового пользователя
 router.post("/register", async (req, res) => {
-  const { name, login, password } = req.body;
+  const { name, surname, email, password, icon } = req.body;
 
   try {
-    if (name === "" || login === "" || password === "") {
+    if (email === "" || password === ""|| name === ""|| surname === ""|| icon=== "") {
       res.status(400).json({ success: false, message: "Заполните все поля" });
     }
-    // если пользователь с таким login уже есть, возвращаем ошибку
-    const foundUser = await User.findOne({ where: { login } });
+    // если пользователь с таким email уже есть, возвращаем ошибку
+    const foundUser = await User.findOne({ where: { email } });
     if (foundUser) {
       return res
         .status(400)
@@ -76,9 +76,9 @@ router.post("/register", async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, login, password: hash });
+    const user = await User.create({ name, surname, email, iconId:Number(icon), password: hash });
 
-    const userData = { id: user.id, name: user.name, login: user.login };
+    const userData = { id: user.id, name: user.name, email: user.email };
 
     return res.json({
       success: true,

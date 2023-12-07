@@ -3,16 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { useDispatch } from 'react-redux';
 
 // импортируем наши редьюсеры
-import categoryReducer from './features/catalog/category/redux/reducer';
 import userReducer from './features/auth/redux/reducer';
-import questReducer from './features/todo/redux/reduser';
 
 //  комбинируем редьюсеры в один rootReducer
 const rootReducer = combineReducers({
   // тут будем прописывать разные наши редьюсеры
-  categoryReducer,
   userReducer,
-  questReducer,
 });
 
 //  создаем redux стор

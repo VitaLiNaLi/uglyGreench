@@ -5,6 +5,7 @@ type User = {
   email: string;
   icon: string;
   password: string;
+  description?: string;
 };
 
 export type UserWithoutId = Omit<User, 'id'>;

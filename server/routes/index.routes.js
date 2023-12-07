@@ -11,6 +11,6 @@ router.use("/api/auth", authRouter);
 // router.use(rejectIfNotAuthorized); // защита роутов ниже от неаутентицированных пользователей
 
 // router.use('/api/favorites', favoritesRouter);
-router.use('/api/profile', profileRouter);
+// router.use('/api/profile', profileRouter);
 
 module.exports = router;

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import * as api from './api';
 
 export default function RegisterPage(): JSX.Element {
-  const [name, setName] = useState('');
   const [icon, setIcon] = useState('');
+  const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +25,7 @@ export default function RegisterPage(): JSX.Element {
       return;
     }
 
-    if (name === '' || surname === '' || email === '' || password === '') {
+    if (icon === '' || name === '' || surname === '' || email === '' || password === '') {
       setError('Заполните все поля');
       return;
     }
@@ -36,7 +36,7 @@ export default function RegisterPage(): JSX.Element {
         // назначаем в глобальном сторе вновь зарегистрированного юзера
         dispatch({ type: 'user/register', payload: data });
         // переадресовываем человека на страницу входа
-        navigate('/ProfilePage');
+        navigate('/main');
         // P.S. тут можно не переадресовывать, а показывать кнопку Войти или что-то другое
       })
       .catch((e: Error) => {
@@ -64,12 +64,14 @@ export default function RegisterPage(): JSX.Element {
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
             Имя
           </label>
+        </div>
+        <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -80,8 +82,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="surname"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -92,8 +94,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-6">
@@ -116,8 +118,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={repeat}
+            onChange={(e) => setRepeat(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">

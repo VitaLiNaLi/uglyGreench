@@ -9,23 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId1: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-        onDelete: "cascade",
-
-      },
-      userId2: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-        onDelete: "cascade",
-      },
+      // userId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "Users",
+      //     key: "id",
+      //   },
+      //   onDelete: "cascade",
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

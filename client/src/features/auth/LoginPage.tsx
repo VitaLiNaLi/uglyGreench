@@ -7,8 +7,8 @@ import * as api from './api';
 export default function LoginPage(): JSX.Element {
   const { isRegistered, user } = useSelector((store: RootState) => store.userReducer);
 
-  const [login, setLogin] = useState(() => {
-    if (isRegistered && user) return user.login;
+  const [email, setEmail] = useState(() => {
+    if (isRegistered && user) return user.email;
     return '';
   });
   const [password, setPassword] = useState('');
@@ -22,17 +22,17 @@ export default function LoginPage(): JSX.Element {
     setError(null);
     event.preventDefault();
 
-    if (login === '' || password === '') {
+    if (email === '' || password === '') {
       setError('Заполните все поля');
       return;
     }
 
     api
-      .login({ login, password })
+      .login({ email, password })
       .then((userData) => {
         setError(null);
         // если все успешно, кладем юзера в стор
-        dispatch({ type: 'user/login', payload: userData });
+        dispatch({ type: 'user/email', payload: userData });
         // и отправляем на главную страницу
         navigate('/');
       })
@@ -48,15 +48,15 @@ export default function LoginPage(): JSX.Element {
 
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             name
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="login"
-            type="text"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 

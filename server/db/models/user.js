@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Friend }) {
+    static associate({ Friend, Icon }) {
       this.hasMany(Friend, { foreignKey: "userId1" });
-      this.belongsTo(Icon,{foreignKey:"iconId"})
+      this.belongsTo(Icon, { foreignKey: "iconId" });
       this.hasMany(Friend, { foreignKey: "userId2" });
     }
   }
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
       },
       admin: {
-        defaultValue:false,
+        defaultValue: false,
         type: DataTypes.BOOLEAN,
       },
     },

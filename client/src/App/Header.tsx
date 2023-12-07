@@ -25,10 +25,10 @@ export default function Header(): JSX.Element {
       <nav className="flex h-20 flex-col">
         <div className="flex h-full bg-blue-600 items-center px-4">
           <Link className="text-sky-300 font-bold text-2xl mr-8" to="/">
-            Main
+            Хочу наза XD
           </Link>
           <Link className="text-sky-300 font-bold text-2xl mr-8" to="/profile">
-            Айди Нахуй бля 
+            Пряничный домик
           </Link>
           <HeaderCatalog openAndCloseModal={openAndCloseModal} />
           <HeaderAuth />

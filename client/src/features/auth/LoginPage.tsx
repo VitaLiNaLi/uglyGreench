@@ -34,7 +34,7 @@ export default function LoginPage(): JSX.Element {
         // если все успешно, кладем юзера в стор
         dispatch({ type: 'user/login', payload: userData });
         // и отправляем на главную страницу
-        navigate('/');
+        navigate('/main');
       })
       .catch((e: Error) => {
         console.error(e);
@@ -49,7 +49,7 @@ export default function LoginPage(): JSX.Element {
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            name
+            email
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -62,7 +62,7 @@ export default function LoginPage(): JSX.Element {
 
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password
+            Пароль
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"

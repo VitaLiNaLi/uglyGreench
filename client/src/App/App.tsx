@@ -10,7 +10,6 @@ import TodoPage from '../features/todo/Todo';
 import SubCategoryParams from '../features/catalog/subCategoryParams/SubCategoryParams';
 import CategoryParams from '../features/catalog/categoryParams/CategoryParams';
 import './App.css';
-import "../features/auth/Login.css"
 import 'tailwindcss/tailwind.css';
 
 function App(): JSX.Element {

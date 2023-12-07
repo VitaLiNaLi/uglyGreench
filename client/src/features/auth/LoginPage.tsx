@@ -32,7 +32,7 @@ export default function LoginPage(): JSX.Element {
       .then((userData) => {
         setError(null);
         // если все успешно, кладем юзера в стор
-        dispatch({ type: 'user/email', payload: userData });
+        dispatch({ type: 'user/login', payload: userData });
         // и отправляем на главную страницу
         navigate('/');
       })

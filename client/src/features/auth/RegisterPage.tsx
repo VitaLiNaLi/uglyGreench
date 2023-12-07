@@ -34,7 +34,8 @@ export default function RegisterPage(): JSX.Element {
       .register({ name, surname, email, password, icon })
       .then((data) => {
         // назначаем в глобальном сторе вновь зарегистрированного юзера
-        dispatch({ type: 'user/register', payload: data });
+        dispatch({ type: 'user/login', payload: data });
+
         // переадресовываем человека на страницу входа
         navigate('/main');
         // P.S. тут можно не переадресовывать, а показывать кнопку Войти или что-то другое

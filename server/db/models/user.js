@@ -7,8 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Profile }) {
-      this.hasMany(Profile, { foreignKey: "userId" });
+    static associate({ Friend }) {
+      this.hasMany(Friend, { foreignKey: "userId1" });
+      this.belongsTo(Icon,{foreignKey:"iconId"})
+      this.hasMany(Friend, { foreignKey: "userId2" });
     }
   }
   User.init(
@@ -25,9 +27,24 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
+      description: {
+        type: DataTypes.TEXT,
+      },
       password: {
         allowNull: false,
         type: DataTypes.TEXT,
+      },
+      iconId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Icons",
+          key: "id",
+        },
+        onDelete: "cascade",
+      },
+      admin: {
+        defaultValue:false,
+        type: DataTypes.BOOLEAN,
       },
     },
     {

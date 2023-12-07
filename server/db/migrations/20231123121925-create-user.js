@@ -25,6 +25,29 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      description: {
+        type: Sequelize.TEXT,
+      },
+      iconId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Icons",
+          key: "id",
+        },
+        onDelete: "cascade",
+      },
+      admin: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {

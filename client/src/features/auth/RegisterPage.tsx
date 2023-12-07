@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import * as api from './api';
 
-
 export default function RegisterPage(): JSX.Element {
   const [login, setLogin] = useState('');
   const [name, setName] = useState('');
@@ -29,7 +28,7 @@ export default function RegisterPage(): JSX.Element {
         // назначаем в глобальном сторе вновь зарегистрированного юзера
         dispatch({ type: 'user/register', payload: data });
         // переадресовываем человека на страницу входа
-        navigate('/login');
+        navigate('/ProfilePage');
         // P.S. тут можно не переадресовывать, а показывать кнопку Войти или что-то другое
       })
       .catch((e: Error) => {
@@ -39,7 +38,7 @@ export default function RegisterPage(): JSX.Element {
   };
 
   return (
-    <div className="w-full max-w-xs mx-auto mt-5">
+    <div className="register-bg w-full max-w-xs mx-auto mt-5">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">

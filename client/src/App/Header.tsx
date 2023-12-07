@@ -22,8 +22,7 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-      <nav className="flex flex-col">
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <nav className="flex h-20 flex-col">
         <div className="flex h-full bg-blue-600 items-center px-4">
           <Link className="text-sky-300 font-bold text-2xl mr-8" to="/">
             Main

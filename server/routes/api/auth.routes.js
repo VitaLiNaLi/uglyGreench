@@ -79,6 +79,23 @@ router.post("/register", async (req, res) => {
     const user = await User.create({ name, surname, email, iconId:Number(icon), password: hash });
 
     const userData = { id: user.id, name: user.name, email: user.email };
+    
+    // сгенерируем jwt токены
+    const { accessToken, refreshToken } = generateTokens({
+      user: { id: user.id, name: user.name, email: user.email },
+    });
+
+    // устанавливаем куки
+    res.cookie(jwtConfig.access.type, accessToken, {
+      maxAge: jwtConfig.access.expiresIn,
+      httpOnly: true,
+    });
+    res.cookie(jwtConfig.refresh.type, refreshToken, {
+      maxAge: jwtConfig.refresh.expiresIn,
+      httpOnly: true,
+    });
+
+
 
     return res.json({
       success: true,

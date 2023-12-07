@@ -68,8 +68,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -80,8 +80,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="surname"
             type="text"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -91,9 +91,9 @@ export default function RegisterPage(): JSX.Element {
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-6">
@@ -110,14 +110,14 @@ export default function RegisterPage(): JSX.Element {
         </div>
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Повторить пароль
+            Повторите пароль
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="repeat"
+            id="password"
             type="password"
-            value={repeat}
-            onChange={(e) => setRepeat(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">

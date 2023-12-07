@@ -1,42 +1,42 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("SubCategories", {
+    await queryInterface.createTable('Friends', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
-      categoryId: {
-        allowNull: false,
+      userId1: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Categories",
+          model: "Users",
+          key: "id",
+        },
+        onDelete: "cascade",
+
+      },
+      userId2: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
           key: "id",
         },
         onDelete: "cascade",
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
-      img: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("SubCategories");
-  },
+    await queryInterface.dropTable('Friends');
+  }
 };

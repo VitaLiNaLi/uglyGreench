@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router';
 import * as api from './api';
 
 export default function RegisterPage(): JSX.Element {
-  const [login, setLogin] = useState('');
+  const [icon, setIcon] = useState('');
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [repeat, setRepeat] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -17,18 +20,23 @@ export default function RegisterPage(): JSX.Element {
 
     event.preventDefault();
 
-    if (login === '' || name === '' || password === '') {
+    if (password !== repeat) {
+      setError('Оба введенных пароля должны быть идентичны');
+      return;
+    }
+
+    if (icon === '' || name === '' || surname === '' || email === '' || password === '') {
       setError('Заполните все поля');
       return;
     }
 
     api
-      .register({ login, name, password })
+      .register({ name, surname, email, password, icon })
       .then((data) => {
         // назначаем в глобальном сторе вновь зарегистрированного юзера
         dispatch({ type: 'user/register', payload: data });
         // переадресовываем человека на страницу входа
-        navigate('/ProfilePage');
+        navigate('/main');
         // P.S. тут можно не переадресовывать, а показывать кнопку Войти или что-то другое
       })
       .catch((e: Error) => {
@@ -41,15 +49,29 @@ export default function RegisterPage(): JSX.Element {
     <div className="register-bg w-full max-w-xs mx-auto mt-5">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              Картинка
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="icon"
+              type="text"
+              value={icon}
+              onChange={(e) => setIcon(e.target.value)}
+            />
+          </div>
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
             Имя
           </label>
+        </div>
+        <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -60,8 +82,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="surname"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -72,8 +94,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-6">
@@ -96,8 +118,8 @@ export default function RegisterPage(): JSX.Element {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={repeat}
+            onChange={(e) => setRepeat(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">

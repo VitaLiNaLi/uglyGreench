@@ -48,7 +48,7 @@ export default function UserProfile({ user }: { user: User }): JSX.Element {
     <>
       <h1 className="underline decoration-wavy font-bold text-xl mb-4">Привет, {user.name}!</h1>
       <div className="relative mb-6">
-        <img src={user.photo ?? '/cat-anonymous.jpeg'} className="w-full" alt="" srcSet="" />
+        <img src={user.icon ?? '/cat-anonymous.jpeg'} className="w-full" alt="" srcSet="" />
         <PencilSquareIcon
           className="w-10 absolute bottom-0 right-0 bg-white hover:text-green-400"
           onClick={() => setShowPhotoForm((prev) => !prev)}

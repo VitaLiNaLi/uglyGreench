@@ -1,8 +1,10 @@
 type User = {
   id: number;
-  login: string;
   name: string;
-  photo?: string;
+  surname: string;
+  email: string;
+  icon: string;
+  password: string;
   description?: string;
 };
 

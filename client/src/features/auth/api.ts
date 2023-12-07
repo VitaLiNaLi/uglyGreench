@@ -2,7 +2,7 @@
 import type User from './redux/types/User';
 import type { UserWithoutId } from './redux/types/User';
 
-export const login = async (userData: { login: string; password: string }): Promise<User> => {
+export const login = async (userData: { email: string; password: string }): Promise<User> => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     body: JSON.stringify(userData),

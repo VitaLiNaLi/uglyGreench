@@ -3,6 +3,8 @@ import TopContainer from '../features/mainPage/TopContainer';
 import JellyfishDestriction from '../features/mainPage/JellyfishDestriction';
 import FullContainer from '../features/mainPage/FullContainer';
 import FishDisctraction from '../features/mainPage/FishDisctraction';
+import ProfilePage from '../features/auth/ProfilePage';
+
 
 function MainPage(): JSX.Element {
   return (
@@ -11,6 +13,7 @@ function MainPage(): JSX.Element {
       <FullContainer />
       <JellyfishDestriction />
       <FishDisctraction />
+      <ProfilePage />
     </div>
   );
 }

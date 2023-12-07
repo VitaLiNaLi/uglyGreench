@@ -19,6 +19,7 @@ export default function HeaderAuth(): JSX.Element {
       })
       .catch((error: Error) => console.log(error.message));
   };
+  console.log(isLoggedIn, user);
 
   return (
     <>

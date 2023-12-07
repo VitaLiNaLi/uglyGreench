@@ -1,0 +1,33 @@
+/* Стили для обычного состояния без анимации "лопающегося" пузырька */
+.bubble-container {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s; /* Добавляем плавный переход при наведении */
+}
+
+.animated-image {
+  position: relative;
+  animation: moveElement 15s infinite alternate;
+  animation-timing-function: linear; /* Используем linear для равномерной плавной анимации */
+}
+
+@keyframes moveElement {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: translate(20px, -10px) scale(0.97);
+  }
+  50% {
+    transform: translate(20px, 10px) scale(1.02);
+  }
+  75% {
+    transform: translate(-20px, -10px) scale(0.98);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}

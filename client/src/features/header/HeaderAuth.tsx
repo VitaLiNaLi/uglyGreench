@@ -24,25 +24,27 @@ export default function HeaderAuth(): JSX.Element {
   return (
     <>
       <div className="flex-1" />
-      <div className="flex items-center">
-        {isLoggedIn && user ? (
-          <button onClick={handleLogout} type="button">
-            выйти
-          </button>
-        ) : (
-          <div>
-            <Link to="/register">
-              <button type="button" className="text-white p-2  hover:bg-indigo-500">
-                регистрация
-              </button>
-            </Link>
-            <Link to="/login">
-              <button type="button" className="text-white  p-2  hover:bg-indigo-500">
-                войти
-              </button>
-            </Link>
-          </div>
-        )}
+      <div className="text-sky-300 font-bold text-2xl mr-8">
+        <div className="flex items-center">
+          {isLoggedIn && user ? (
+            <button onClick={handleLogout} type="button">
+              выйти
+            </button>
+          ) : (
+            <div>
+              <Link to="/register">
+                <button type="button" className="text-white p-2  hover:bg-indigo-500">
+                  регистрация
+                </button>
+              </Link>
+              <Link to="/login">
+                <button type="button" className="text-white  p-2  hover:bg-indigo-500">
+                  войти
+                </button>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

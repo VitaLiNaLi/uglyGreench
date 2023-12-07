@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import video from '../../public/videos/onePageSanta.mp4';
+import type { RootState } from '../store';
 
 function SplashScreen(): JSX.Element {
+  const user = useSelector((store: RootState) => store.userReducer.user);
+
   return (
     <div className="relative h-screen">
       <video
@@ -17,12 +21,21 @@ function SplashScreen(): JSX.Element {
         Ваш браузер не поддерживает тег video.
       </video>
       <div className="flex justify-center items-center h-full">
-        <Link
-          to="/register"
-          className="bg-transparent hover:bg-blue-500 text-3xl text-white font-bold py-12 px-24 rounded-lg z-10 border-2 border-white"
-        >
-          Нажмите сюда
-        </Link>
+        {user ? (
+          <Link
+            to="/main"
+            className="bg-transparent hover:bg-blue-500 text-3xl text-white font-bold py-12 px-24 rounded-lg z-10 border-2 border-white"
+          >
+            Хочу подарок
+          </Link>
+        ) : (
+          <Link
+            to="/register"
+            className="bg-transparent hover:bg-blue-500 text-3xl text-white font-bold py-12 px-24 rounded-lg z-10 border-2 border-white"
+          >
+            Хочу подарок
+          </Link>
+        )}
       </div>
     </div>
   );

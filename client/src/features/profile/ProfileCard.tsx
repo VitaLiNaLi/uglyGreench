@@ -1,21 +1,20 @@
 import React from 'react';
-import type Profile from './redux/types/Profile';
-import { type RootState, useAppDispatch } from '../../store';
+import { useSelector } from 'react-redux';
+import { type RootState } from '../../store';
 
-type ProfilePropsType = {
-  profile: Profile[];
-};
-function ProfileCard({ profile }: ProfilePropsType): JSX.Element {
-  const profile = useSelector((store:RootState) => store.reducerProfile.profile);
-  const dispatch = useAppDispatch();
+function ProfileCard(): JSX.Element {
+  const user = useSelector((store: RootState) => store.userReducer.user);
+  console.log(user);
   return (
     <>
-      <div className="" key={profile.id}>
-        <img src={profile.icon} alt="" />
-        <p>{profile.name}</p>
-        <p>{profile.surname}</p>
-        <p>{profile.description}</p>
-      </div>
+      {user && (
+        <div className="" key={user.id}>
+          <img src={user.icon} alt="#" />
+          <p>{user.name}</p>
+          <p>{user.surname}</p>
+          <p>{user.description}</p>
+        </div>
+      )}
     </>
   );
 }

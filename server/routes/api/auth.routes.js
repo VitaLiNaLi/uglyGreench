@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
-const { User } = require("../../db/models");
+const { User,Friend } = require("../../db/models");
 const generateTokens = require("../../utils/authUtils");
 const jwtConfig = require("../../config/jwtConfig");
 
@@ -31,11 +31,11 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const userData = { id: user.id, name: user.name, email: user.email };
+    const userData = { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description };
 
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, email: user.email },
+      user: { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description },
     });
 
     // устанавливаем куки
@@ -77,12 +77,13 @@ router.post("/register", async (req, res) => {
 
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, surname, email, iconId:Number(icon), password: hash });
+    const friend = await Friend.create({ userId:1});
 
-    const userData = { id: user.id, name: user.name, email: user.email };
+    const userData = { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description};
     
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, email: user.email },
+      user: { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description },
     });
 
     // устанавливаем куки

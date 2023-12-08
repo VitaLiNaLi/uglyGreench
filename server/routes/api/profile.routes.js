@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Icon } = require("../../db/models");
+const { User, Icon , Friend} = require("../../db/models");
 //const upload = require("../../utils/uploadMulter");
 
 //для записи желания в базу
@@ -68,13 +68,13 @@ router.get("/Xday", async (req, res) => {
 
     await Promise.all(
       results.map((result) => {
-        User.update(
-          { friend: result[1] },
-          { where: { id: Number(result[0]) } }
+        Friend.update(
+          { userId: result[1] },
+          {where:{id:Number(result[0])}}
         );
       })
     );
-    let allFriends = await User.findAll({ attributes: ["id", "friend"] });
+    const allFriends = await Friend.findAll({ attributes: ["id", "userId"] });
     console.log({ allFriends });
     return res.json({ success: true, data: allFriends });
   } catch (error) {

@@ -3,20 +3,20 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Friends', {
-      id: {
+      donorid: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // userId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "Users",
-      //     key: "id",
-      //   },
-      //   onDelete: "cascade",
-      // },
+      recipientId: {
+      type: Sequelize.INTEGER,
+      references: {
+      model: "Users",
+      key: "id",
+      },
+      onDelete: "cascade",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

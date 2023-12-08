@@ -5,7 +5,6 @@ import SplashScreen from './SplashScreen';
 import Layout from './Layout';
 import LoginPage from '../features/auth/LoginPage';
 import RegisterPage from '../features/auth/RegisterPage';
-// import ProfilePage from '../features/auth/ProfilePage';
 import './App.css';
 import 'tailwindcss/tailwind.css';
 import ProfilePage from './ProfilePage';
@@ -30,7 +29,9 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<SplashScreen />} />
       <Route element={<Layout />}>
+
         <Route path="/main" element={<Main />} /> 
+
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />

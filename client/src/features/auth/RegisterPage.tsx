@@ -4,10 +4,21 @@ import { useNavigate } from 'react-router';
 import * as api from './api';
 import type TypeIcon from '../icon/redux/types/Icon';
 import type { RootState } from '../../store';
-import type Icon from '../icon/redux/types/Icon';
+import ModalIcon from '../icon/ModalIcon';
 
 export default function RegisterPage(): JSX.Element {
-  const [icon, setIcon] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openAndCloseModal = (): void => {
+    setModalOpen((prev) => !prev); // Инвертируем значение состояния
+  };
+  const icons = useSelector((store: RootState) => store.iconsReducer.icons);
+
+  const [icon, setIcon] = useState<TypeIcon>(icons[0]);
+
+  const avatar = (iconAvatar: TypeIcon): void => {
+    setIcon(iconAvatar);
+  };
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -28,7 +39,7 @@ export default function RegisterPage(): JSX.Element {
       return;
     }
 
-    if (icon === '' || name === '' || surname === '' || email === '' || password === '') {
+    if (name === '' || surname === '' || email === '' || password === '') {
       setError('Заполните все поля');
       return;
     }
@@ -59,46 +70,42 @@ export default function RegisterPage(): JSX.Element {
       })
       .then((data) => {
         const newIcons = data.icons as TypeIcon[];
-        console.log(newIcons);
+        // console.log(newIcons);
         dispatch({ type: 'icons/init', payload: newIcons });
       })
       .catch((error) => console.error('Error fetching categories:', error));
   }, [dispatch]);
 
-  const icons = useSelector((store: RootState) => store.iconsReducer.icons);
+  useEffect(() => {
+    if (icons.length > 0) {
+      setIcon(icons[0]);
+    }
+  }, [icons]);
 
   return (
     <div className="register-bg w-full max-w-xs mx-auto mt-5">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          {icons.map((icon: Icon) => (
-            <tr
-              key={icon.id}
-              className="hover:bg-gray-100"
-              // onMouseEnter={() => handleCategoryHover(icon)}
-              // onMouseLeave={handleCategoryLeave}
-            >
-              <td className="w-screen text-lg rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-200">
-                <img src={icon.src} alt={icon.alt} />
-              </td>
-            </tr>
-          ))}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Картинка
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="icon"
-              type="text"
-              value={icon}
-              onChange={(e) => setIcon(e.target.value)}
-            />
+        <ModalIcon openAndCloseModal={openAndCloseModal} icon={icon} />
+
+        {modalOpen && (
+          <div className="flex items-center justify-center flex-wrap">
+            {icons.map((iconAvatar: TypeIcon) => (
+              <div
+                key={iconAvatar.id}
+                className="m-2 cursor-pointer"
+                onClick={() => {
+                  avatar(iconAvatar);
+                  openAndCloseModal();
+                }}
+              >
+                <img src={iconAvatar.src} alt={iconAvatar.alt} />
+              </div>
+            ))}
           </div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
-            Имя
-          </label>
-        </div>
+        )}
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
+          Имя
+        </label>
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

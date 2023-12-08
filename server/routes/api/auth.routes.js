@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
-const { User,Friend } = require("../../db/models");
+const { User, Friend } = require("../../db/models");
 const generateTokens = require("../../utils/authUtils");
 const jwtConfig = require("../../config/jwtConfig");
 
 // аутентицикация существующего пользователя
 router.post("/login", async (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
 
   try {
     if (email === "" || password === "") {
@@ -31,11 +31,25 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const userData = { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description };
+    const userData = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      surname: user.surname,
+      icon: user.icon,
+      description: user.description,
+    };
 
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        surname: user.surname,
+        icon: user.icon,
+        description: user.description,
+      },
     });
 
     // устанавливаем куки
@@ -64,7 +78,7 @@ router.post("/register", async (req, res) => {
   const { name, surname, email, password, icon } = req.body;
 
   try {
-    if (email === "" || password === ""|| name === ""|| surname === ""|| icon=== "") {
+    if (email === "" || password === "" || name === "" || surname === "") {
       res.status(400).json({ success: false, message: "Заполните все поля" });
     }
     // если пользователь с таким email уже есть, возвращаем ошибку
@@ -76,14 +90,33 @@ router.post("/register", async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, surname, email, iconId:Number(icon), password: hash });
-    const friend = await Friend.create({ userId:1});
+    const user = await User.create({
+      name,
+      surname,
+      email,
+      password: hash,
+      iconId: icon.id,
+    });
 
-    const userData = { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description};
-    
+    const userData = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      surname: user.surname,
+      icon: user.icon,
+      description: user.description,
+    };
+
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, email: user.email, surname: user.surname, icon: user.icon, description:user.description },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        surname: user.surname,
+        icon: user.icon,
+        description: user.description,
+      },
     });
 
     // устанавливаем куки
@@ -95,8 +128,6 @@ router.post("/register", async (req, res) => {
       maxAge: jwtConfig.refresh.expiresIn,
       httpOnly: true,
     });
-
-
 
     return res.json({
       success: true,

@@ -40,6 +40,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BOOLEAN,
       },
+      friend: {
+        type: Sequelize.INTEGER,
+    },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

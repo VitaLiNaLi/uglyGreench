@@ -45,7 +45,10 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
         type: DataTypes.BOOLEAN,
       },
+      friend: {
+        type: DataTypes.INTEGER,
     },
+  },
     {
       sequelize,
       modelName: "User",

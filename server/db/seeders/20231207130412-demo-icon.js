@@ -55,12 +55,6 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          src: "img/assets/снегурочка.jpg",
-          alt: "снегурочка",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
           src: "img/assets/фейерверк.png",
           alt: "фейурверк",
           createdAt: new Date(),

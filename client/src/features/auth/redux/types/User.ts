@@ -1,9 +1,11 @@
+import type Icon from '../../../icon/redux/types/Icon';
+
 type User = {
   id: number;
   name: string;
   surname: string;
   email: string;
-  icon: string;
+  icon: Icon;
   password: string;
   description?: string;
 };

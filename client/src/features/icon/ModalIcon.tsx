@@ -3,14 +3,14 @@ import type TypeIcon from './redux/types/Icon';
 
 type ModalIconProps = {
   openAndCloseModal: () => void;
-  iconAvatar: TypeIcon;
+  icon: TypeIcon;
 };
 
-function ModalIcon({ openAndCloseModal, iconAvatar }: ModalIconProps): JSX.Element {
+function ModalIcon({ openAndCloseModal, icon }: ModalIconProps): JSX.Element {
   const handleCatalogClick = (): void => {
     openAndCloseModal(); // Вызываем функцию openModal при нажатии на кнопку
   };
-  console.log(iconAvatar);
+  console.log(icon);
 
   return (
     <div className="flex justify-center items-center mt-8 mb-8">
@@ -19,7 +19,7 @@ function ModalIcon({ openAndCloseModal, iconAvatar }: ModalIconProps): JSX.Eleme
         onClick={handleCatalogClick}
         className="bg rounded-full w-24 h-12 flex justify-center items-center"
       >
-        {iconAvatar && iconAvatar.src && <img src={iconAvatar.src} alt={iconAvatar.alt} />}
+        {icon && icon.src && <img src={icon.src} alt={icon.alt} />}
       </button>
     </div>
   );

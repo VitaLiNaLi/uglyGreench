@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
-const { User, Friend } = require("../../db/models");
+const { User, Friend, Icon } = require("../../db/models");
 const generateTokens = require("../../utils/authUtils");
 const jwtConfig = require("../../config/jwtConfig");
 
@@ -31,14 +31,24 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    const youricon= await Icon.findOne({ where: { id:user.icon } });
     const userData = {
       id: user.id,
       name: user.name,
       email: user.email,
       surname: user.surname,
-      icon: user.icon,
+      icon: youricon,
       description: user.description,
     };
+
+    const friend = await Friend.findOne({ where: { donorId:user.id } });
+    console.log(friend, 'i found_all');
+
+
+    if(friend){
+      const friendData=await User.findOne({ attributes: ['name', 'surname', 'description'], where: { id:friend.recipientId } });
+      console.log(friendData);
+    }else{const friendData={}; console.log(friendData);}
 
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
@@ -47,7 +57,7 @@ router.post("/login", async (req, res) => {
         name: user.name,
         email: user.email,
         surname: user.surname,
-        icon: user.icon,
+        icon: youricon,
         description: user.description,
       },
     });
@@ -66,6 +76,7 @@ router.post("/login", async (req, res) => {
     return res.json({
       success: true,
       user: userData,
+      friend:friendData,
     });
   } catch (error) {
     console.error(error);
@@ -98,15 +109,25 @@ router.post("/register", async (req, res) => {
       iconId: icon.id,
     });
 
+
+
+    const youricon= await Icon.findOne({ where: { id:user.icon } });
     const userData = {
       id: user.id,
       name: user.name,
       email: user.email,
       surname: user.surname,
-      icon: user.icon,
+      icon: youricon,
       description: user.description,
     };
 
+
+    const friend = await Friend.findOne({ where: { donorId:user.id } });
+
+    if(friend){
+      const friendData=await User.findOne({ attributes: ['name', 'surname', 'description'], where: { id:friend.recipientId } });
+    }else{const friendData={}}
+ 
     // сгенерируем jwt токены
     const { accessToken, refreshToken } = generateTokens({
       user: {
@@ -114,7 +135,7 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         surname: user.surname,
-        icon: user.icon,
+        icon: youricon,
         description: user.description,
       },
     });
@@ -132,6 +153,7 @@ router.post("/register", async (req, res) => {
     return res.json({
       success: true,
       user: userData,
+      friend:friendData,
     });
   } catch (error) {
     console.error(error);

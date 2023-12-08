@@ -30,7 +30,7 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<SplashScreen />} />
       <Route element={<Layout />}>
-        <Route path="/main" element={<Main />} />
+        {/* <Route path="/main" element={<Main />} /> */}
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />

@@ -10,6 +10,7 @@ type User = {
   description?: string;
 };
 
+
 export type UserWithoutId = Omit<User, 'id'>;
 
 export default User;

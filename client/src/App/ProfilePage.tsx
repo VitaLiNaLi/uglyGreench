@@ -5,7 +5,7 @@ import ProfileCard from '../features/profile/ProfileCard';
 
 function ProfilePage(): JSX.Element {
   return (
-    <div>
+    <div className="profile-container">
       <ProfileCard />
     </div>
   );

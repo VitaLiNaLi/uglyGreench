@@ -4,9 +4,15 @@ import { useNavigate } from 'react-router';
 import * as api from './api';
 import type TypeIcon from '../icon/redux/types/Icon';
 import type { RootState } from '../../store';
-import type Icon from '../icon/redux/types/Icon';
+import ModalIcon from '../icon/ModalIcon';
 
 export default function RegisterPage(): JSX.Element {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openAndCloseModal = (): void => {
+    setModalOpen((prev) => !prev); // Инвертируем значение состояния
+  };
+
   const [icon, setIcon] = useState('');
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -59,7 +65,7 @@ export default function RegisterPage(): JSX.Element {
       })
       .then((data) => {
         const newIcons = data.icons as TypeIcon[];
-        console.log(newIcons);
+        // console.log(newIcons);
         dispatch({ type: 'icons/init', payload: newIcons });
       })
       .catch((error) => console.error('Error fetching categories:', error));
@@ -67,38 +73,49 @@ export default function RegisterPage(): JSX.Element {
 
   const icons = useSelector((store: RootState) => store.iconsReducer.icons);
 
+  const [iconAvatar, setIconAvatar] = useState<TypeIcon>(icons[0]);
+
+  const avatar = (selectedIcon: TypeIcon): void => {
+    setIconAvatar(selectedIcon);
+  };
+
+  useEffect(() => {
+    if (icons.length > 0) {
+      setIconAvatar(icons[0]);
+    }
+  }, [icons]);
+
   return (
     <div className="register-bg w-full max-w-xs mx-auto mt-5">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          {icons.map((icon: Icon) => (
-            <tr
-              key={icon.id}
-              className="hover:bg-gray-100"
-              // onMouseEnter={() => handleCategoryHover(icon)}
-              // onMouseLeave={handleCategoryLeave}
-            >
-              <td className="w-screen text-lg rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-200">
-                <img src={icon.src} alt={icon.alt} />
-              </td>
-            </tr>
-          ))}
+        <ModalIcon openAndCloseModal={openAndCloseModal} iconAvatar={iconAvatar} />
+
+        {modalOpen && (
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Картинка
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="icon"
-              type="text"
-              value={icon}
-              onChange={(e) => setIcon(e.target.value)}
-            />
+            {icons.map((icon: TypeIcon) => (
+              <tr key={icon.id} className="hover:bg-gray-100">
+                <td className="w-screen text-lg rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-200">
+                  <img src={icon.src} alt={icon.alt} onClick={() => avatar(icon)} />
+                </td>
+              </tr>
+            ))}
           </div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
-            Имя
+        )}
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            Картинка
           </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="icon"
+            type="text"
+            value={icon}
+            onChange={(e) => setIcon(e.target.value)}
+          />
         </div>
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="login">
+          Имя
+        </label>
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

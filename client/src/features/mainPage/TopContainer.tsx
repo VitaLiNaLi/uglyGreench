@@ -1,73 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './TopContainer.css';
+import SantaWOOO from '../../../public/img/SantaWOOO.png';
+import MerryChristmas from '../../../public/img/MerryChristmas.png';
 
 function TopContainer(): JSX.Element {
-  const [images, setImages] = useState<string[]>([]);
-  const [selectedImageIndices, setSelectedImageIndices] = useState<(number | 'text')[]>(
-    Array(5).fill(0),
-  );
-  const [clickedIndices, setClickedIndices] = useState<number[]>([]); // Новое состояние для отслеживания нажатых изображений
+  const [showSanta, setShowSanta] = useState(MerryChristmas);
+  const [showHoHoHo, setShowHoHoHo] = useState(false);
 
-  useEffect(() => {
-    const fetchImages = async (): Promise<void> => {
-      try {
-        const response = await fetch('/api/imagesList');
-        if (response.ok) {
-          const data = await response.json();
-          setImages(data.images);
-        } else {
-          console.error('Ошибка при получении изображений:', response.status);
-        }
-      } catch (error) {
-        console.error('Ошибка fetch запроса:', error);
-      }
-    };
-
-    fetchImages();
-  }, []);
-
-  function handleImageClick(index: number): void {
-    if (!clickedIndices.includes(index)) {
-      setClickedIndices([...clickedIndices, index]); // Добавить индекс нажатого изображения в состояние
-      let currentIndex = 0; // Установка начального индекса
-      const intervalId = setInterval(() => {
-        currentIndex += 1; // Обновление текущего индекса
-        setSelectedImageIndices((prevIndices) => {
-          const newSelectedImageIndices = [...prevIndices];
-          if (currentIndex < images.length) {
-            newSelectedImageIndices[index] = currentIndex; // Обновление только одного индекса
-          } else {
-            newSelectedImageIndices[index] = 'text';
-            clearInterval(intervalId);
-          }
-          // console.log(currentIndex);
-          return newSelectedImageIndices; // Возврат нового состояния индексов
-        });
-      }, 100); // Переключение каждую 100 миллисекунд
-    }
-  }
+  const handleButtonClick = (): void => {
+    setShowSanta(SantaWOOO);
+    setShowHoHoHo(true);
+  };
 
   return (
-    <div className="flex justify-center w-full">
-      <div className="absolute z-10 w-3/4 flex justify-around p-5">
-        {selectedImageIndices.map((selectedIndex, index) => (
-          <div key={index} className="container">
-            {typeof selectedIndex === 'number' ? (
-              <img
-                src={images[selectedIndex]}
-                alt={`Картинка ${index + 1}`}
-                key={index}
-                role="presentation"
-                onClick={() => handleImageClick(index)}
-                onDragStart={(e) => e.preventDefault()}
-                className="bubble-container mb-4 mt-4 animated-image"
-              />
-            ) : (
-              <p key={index}>Текст</p>
-            )}
-          </div>
-        ))}
+    <div className="flex flex-col justify-center items-center h-full">
+      <div style={{ position: 'relative' }}>
+        <button
+          type="button"
+          onClick={handleButtonClick}
+          className="p-0 m-0" // Убираем внутренние и внешние отступы у кнопки
+        >
+          <img
+            src={showSanta}
+            alt="Christmas"
+            className="w-80 h-80 rounded-full mt-16 mb-4" // Увеличиваем отступ сверху до 8 пикселей
+          />
+        </button>
+        {showHoHoHo && (
+          <p
+            className="text-red-500 text-4xl font-bold" // Изменяем размер и стиль текста
+            style={{ position: 'absolute', top: '16px', right: '16px' }} // Перемещаем текст над изображением
+          >
+            ХО-ХО-ХО
+          </p>
+        )}
       </div>
+      <p className="text-2xl font-bold">Начнем праздник!!!</p>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { type RootState } from '../../store';
 import * as api from './api';
+import klipartzImg from '../../../public/img/klipartz.com.png';
 
 export default function LoginPage(): JSX.Element {
   const { isRegistered, user } = useSelector((store: RootState) => store.userReducer);
@@ -81,6 +82,7 @@ export default function LoginPage(): JSX.Element {
             Войти
           </button>
         </div>
+          <img src={klipartzImg} alt="#" />
         {error && <div className="text-red-700">{error}</div>}
       </form>
     </div>

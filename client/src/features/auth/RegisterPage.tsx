@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import * as api from './api';
+import type TypeIcon from '../icon/redux/types/Icon';
+import type { RootState } from '../../store';
+import type Icon from '../icon/redux/types/Icon';
 
 export default function RegisterPage(): JSX.Element {
   const [icon, setIcon] = useState('');
@@ -46,10 +49,40 @@ export default function RegisterPage(): JSX.Element {
       });
   };
 
+  useEffect(() => {
+    fetch('/api/icons')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const newIcons = data.icons as TypeIcon[];
+        console.log(newIcons);
+        dispatch({ type: 'icons/init', payload: newIcons });
+      })
+      .catch((error) => console.error('Error fetching categories:', error));
+  }, [dispatch]);
+
+  const icons = useSelector((store: RootState) => store.iconsReducer.icons);
+
   return (
     <div className="register-bg w-full max-w-xs mx-auto mt-5">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
+          {icons.map((icon: Icon) => (
+            <tr
+              key={icon.id}
+              className="hover:bg-gray-100"
+              // onMouseEnter={() => handleCategoryHover(icon)}
+              // onMouseLeave={handleCategoryLeave}
+            >
+              <td className="w-screen text-lg rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-200">
+                <img src={icon.src} alt={icon.alt} />
+              </td>
+            </tr>
+          ))}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Картинка

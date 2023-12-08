@@ -24,10 +24,14 @@ export default function HeaderAuth(): JSX.Element {
   return (
     <>
       <div className="flex-1" />
-      <div className="text-sky-300 font-bold text-2xl mr-8">
+      <div className="font-bold text-2xl mr-8">
         <div className="flex items-center">
           {isLoggedIn && user ? (
-            <button onClick={handleLogout} type="button">
+            <button
+              onClick={handleLogout}
+              type="button"
+              className="text-white p-2  hover:bg-indigo-500"
+            >
               выйти
             </button>
           ) : (

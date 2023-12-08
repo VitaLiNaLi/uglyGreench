@@ -1,10 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { type RootState } from '../../store';
+import * as api from '../../features/auth/api';
 
 function ProfileCard(): JSX.Element {
+  const [description, setDescription] = useState('');
   const user = useSelector((store: RootState) => store.userReducer.user);
+  const dispatch = useDispatch();
   console.log(user);
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    api
+      .updateProfile(description)
+      .then((userData) => {
+        dispatch({ type: 'user/updateInfo', payload: userData });
+      })
+      .catch((e: Error) => {
+        console.error(e);
+      });
+  };
   return (
     <>
       {user && (
@@ -18,11 +32,21 @@ function ProfileCard(): JSX.Element {
               />
               <p className="profile-name">{user.name}</p>
               <p className="profile-surname">{user.surname}</p>
-              <p className="profile-description">{user.description}</p>
-              <form action="">
-                <label>
-                  <input type="text" placeholder="Ваши пожелания" />
-                </label>
+              <form action="form" onSubmit={handleSubmit}>
+                <textarea
+                  type="text"
+                  className="form-control"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                  placeholder="Ваши пожелания"
+                />
+                <button
+                  type="submit"
+                  className="button btn btn-primary w-28 h-8 bg-green-400 rounded-full "
+                  style={{ marginTop: '10px' }}
+                >
+                  отправить
+                </button>
               </form>
             </div>
           </div>

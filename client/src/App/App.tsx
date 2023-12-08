@@ -7,6 +7,7 @@ import LoginPage from '../features/auth/LoginPage';
 import RegisterPage from '../features/auth/RegisterPage';
 // import ProfilePage from '../features/auth/ProfilePage';
 import './App.css';
+import "../features/profile/Profile.css"
 import 'tailwindcss/tailwind.css';
 import ProfilePage from './ProfilePage';
 import { useAppDispatch } from '../store';

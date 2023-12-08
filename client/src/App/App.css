@@ -7,51 +7,7 @@ body {
   /* background-image: inherit; */
   color: white;
 }
-.profile-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10%;
-}
-.profile-card {
-  width: 600px;
-  height: 600px;
-  /* background-color: #fff; */
-  background-image: url('../public/img/pngwing.png');
-  background-size: 100% 100%;
-  color: #000;
-  /* border-radius: 10px; */
-  display: flex;
-  justify-content: center;
-}
-.profile-card_wrapper {
-  margin-top: 100px;
-  width: 80%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
 
-.profile-card_section {
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  height: auto;
-  text-align: center;
-}
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 60%;
-  margin-top: 30%;
-}
-.profile-name,
-.profile-surname,
-.profile-description {
-  width: 150px;
-  height: 32px;
-}
 @font-face {
   font-family: 'Zanesennyj';
   src: url('./fonts/Zanesennyj.ttf') format('truetype');
@@ -65,3 +21,12 @@ body {
   font-style: normal;
   font-weight: normal;
 }
+
+@font-face {
+  font-family: 'New_Year';
+  src: url('./fonts/New_Year.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+

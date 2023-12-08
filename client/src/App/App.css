@@ -1,0 +1,32 @@
+body {
+  font-family: 'Roboto', sans-serif;
+
+  /* background-image: url('../public/img/bg.png'); */
+  background-color: rgb(2 6 23);
+  /* background-size: 100% auto; */
+  /* background-image: inherit; */
+  color: white;
+}
+
+@font-face {
+  font-family: 'Zanesennyj';
+  src: url('./fonts/Zanesennyj.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Merry-christmas-flake';
+  src: url('./fonts/Merry-christmas-flake.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'New_Year';
+  src: url('./fonts/New_Year.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+

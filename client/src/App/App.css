@@ -1,6 +1,10 @@
 body {
   font-family: 'Roboto', sans-serif;
+
+  /* background-image: url('../public/img/bg.png'); */
   background-color: rgb(2 6 23);
+  /* background-size: 100% auto; */
+  /* background-image: inherit; */
   color: white;
 }
 .profile-container {
@@ -12,14 +16,17 @@ body {
 }
 .profile-card {
   width: 600px;
-  height: auto;
-  background-color: #fff;
+  height: 600px;
+  /* background-color: #fff; */
+  background-image: url('../public/img/pngwing.png');
+  background-size: 100% 100%;
   color: #000;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   display: flex;
   justify-content: center;
 }
 .profile-card_wrapper {
+  margin-top: 100px;
   width: 80%;
   height: 100%;
   display: flex;
@@ -39,7 +46,9 @@ body {
   border-radius: 60%;
   margin-top: 30%;
 }
-.profile-name, .profile-surname, .profile-description{
+.profile-name,
+.profile-surname,
+.profile-description {
   width: 150px;
   height: 32px;
 }

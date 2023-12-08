@@ -5,7 +5,7 @@ import ProfileCard from '../features/profile/ProfileCard';
 
 function ProfilePage(): JSX.Element {
   return (
-    <div className="profile-container">
+    <div className="animate-fade-up animate-once animate-delay-[8ms] animate-ease-linear profile-container">
       <ProfileCard />
     </div>
   );

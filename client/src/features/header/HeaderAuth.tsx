@@ -23,7 +23,7 @@ export default function HeaderAuth(): JSX.Element {
 
   return (
     <>
-      <div className="flex-1" />
+      <div className="flex-2" />
       <div className="font-bold text-2xl mr-8">
         <div className="flex items-center">
           {isLoggedIn && user ? (

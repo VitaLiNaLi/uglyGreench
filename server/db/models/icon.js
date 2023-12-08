@@ -13,7 +13,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Icon.init(
     {
-      img: DataTypes.STRING,
+      src: {
+        defaultValue: "server/assets/год-дракона.png",
+        type: DataTypes.STRING,
+      },
+      alt: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

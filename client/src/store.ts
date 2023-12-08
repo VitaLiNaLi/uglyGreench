@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux';
 
 // импортируем наши редьюсеры
 import userReducer from './features/auth/redux/reducer';
+import iconsReducer from './features/icon/redux/reducer';
 
 //  комбинируем редьюсеры в один rootReducer
 const rootReducer = combineReducers({
   // тут будем прописывать разные наши редьюсеры
   userReducer,
+  iconsReducer,
 });
 
 //  создаем redux стор

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 import HeaderAuth from '../features/header/HeaderAuth';
 
@@ -10,9 +9,12 @@ export default function Header(): JSX.Element {
         <Link className="text-sky-300 font-bold text-2xl mr-8" to="/">
           Хочу наза XD
         </Link>
+  
         <Link className="text-sky-300 font-bold text-2xl mr-8" to="/profile">
           Пряничный домик
-        </Link>
+        </Link> 
+           
+
         <HeaderAuth />
       </div>
     </nav>

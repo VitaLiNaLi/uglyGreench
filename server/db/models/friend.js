@@ -8,12 +8,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({User}) {
-      this.belongsTo(User, { foreignKey: "userId" });
+      this.belongsTo(User, { foreignKey: "donorId" });
+      this.belongsTo(User, { foreignKey: "recipientId" });
     }
   }
   Friend.init(
     {
       recipientId: {
+      type: DataTypes.INTEGER,
+      references: {
+      model: "Users",
+      key: "id",
+      },
+      onDelete: "cascade",
+    },
+    donorId: {
       type: DataTypes.INTEGER,
       references: {
       model: "Users",

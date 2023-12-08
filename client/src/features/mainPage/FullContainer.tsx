@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import video from '../../../public/videos/animation-mainPage.mp4';
 import './FullContainer.css';
 import 'animate.css';
 
@@ -31,22 +30,7 @@ function FullContainer(): JSX.Element {
 
   return (
     <div className="w-full flex justify-center relative">
-      <video autoPlay loop muted playsInline className=" text-white rounded-md mb-8 mt-4">
-        <source src={video} type="video/mp4" />
-      </video>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-bold text-9xl">
-        {texts.map((text, index) => (
-          <p
-            key={index}
-            id={`animated${index}`}
-            style={{
-              display: index === currentTextIndex ? 'block' : 'none',
-            }}
-          >
-            {text}
-          </p>
-        ))}
-      </div>
+
     </div>
   );
 }

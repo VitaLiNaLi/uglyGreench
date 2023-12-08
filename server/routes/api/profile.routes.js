@@ -66,16 +66,22 @@ router.get("/Xday", async (req, res) => {
       .map((sorta, index) => [sorta, sortable[index]])
       .sort((a, b) => a[0] - b[0]);
 
-    await Promise.all(
-      results.map((result) => {
-        Friend.update(
-          { userId: result[1] },
-          {where:{id:Number(result[0])}}
+    await Friend.destroy({
+      where: {},
+      truncate: true
+    }) 
+
+    const a = await Promise.all( results.map(async(result) =>{ 
+       const d = await Friend.create(
+          { recipientId: result[1], donorId:Number(result[0])  }
         );
       })
     );
-    const allFriends = await Friend.findAll({ attributes: ["id", "userId"] });
-    console.log({ allFriends });
+
+    const allFriends = await Friend.findAll({
+      attributes: ['recipientId', 'donorId']
+    });
+    console.log( allFriends );
     return res.json({ success: true, data: allFriends });
   } catch (error) {
     console.error("Ошибка при обработке запроса:", error);
@@ -88,10 +94,10 @@ router.get("/friend", async (req, res) => {
   const userId = res.locals.user?.id;
 
   try {
-    const user = await User.findByPk(userId);
-    const friend = await User.findOne({ where: { id: user.friend } });
+    const friend= await User.findOne({where:{donorId:userId}});
+    const user = await User.findOne({ where: { id: friend.recipientId } });
 
-    return res.json({ success: true, data: friend });
+    return res.json({ success: true, data: user });
   } catch (error) {
     console.error("Ошибка при обработке запроса:", error);
     return res.status(500).json({ success: false, message: error.message });
@@ -104,6 +110,7 @@ router.get("/icon", async (req, res) => {
 
   try {
     const allIcons = await Icon.findAll();
+    console.log(allIcons);
 
     return res.json({ success: true, data: allIcons });
   } catch (error) {

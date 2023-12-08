@@ -9,6 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      donorId: {
+        type: Sequelize.INTEGER,
+        references: {
+        model: "Users",
+        key: "id",
+        },
+        onDelete: "cascade",
+        },
       recipientId: {
       type: Sequelize.INTEGER,
       references: {

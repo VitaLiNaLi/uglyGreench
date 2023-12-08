@@ -6,6 +6,7 @@ module.exports = {
 
      await queryInterface.bulkInsert('Friends', [
       {
+        donorId:
         recipientId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),

@@ -27,7 +27,7 @@ function ProfileCard(): JSX.Element {
             <div className="profile-card_section">
               <img
                 className="profile-img"
-                src="https://avatars.dzeninfra.ru/get-zen_doc/1904927/pub_5e065539028d6800b27cbb8f_5e0655fe98fe7900aca0068c/scale_1200"
+                src={user.icon}
                 alt="#"
               />
               <p className="profile-name">{user.name}</p>

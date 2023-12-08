@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
         name: user.name,
         email: user.email,
         surname: user.surname,
-        icon: user.icon,
+        icon: youricon,
         description: user.description,
       },
     });
@@ -135,7 +135,7 @@ router.post("/register", async (req, res) => {
         name: user.name,
         email: user.email,
         surname: user.surname,
-        icon: user.icon,
+        icon: youricon,
         description: user.description,
       },
     });

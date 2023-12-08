@@ -16,13 +16,13 @@ export default function Header(): JSX.Element {
           Хочу к снеговику
         </Link>
         <div className="flex-1" />
-        {location.pathname === '/profile' ? (
-          <Link className="text-sky-300 font-bold text-2xl mr-8" to="/main">
-            Праздничное настроение
-          </Link>
-        ) : (
+        {location.pathname === '/main' ? (
           <Link className="text-sky-300 font-bold text-2xl mr-8" to="/profile">
             Пряничный домик
+          </Link>
+        ) : (
+          <Link className="text-sky-300 font-bold text-2xl mr-8" to="/main">
+            Праздничное настроение
           </Link>
         )}
 
